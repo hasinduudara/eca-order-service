@@ -51,4 +51,21 @@ public class OrderService {
                 .quantity(orderLineItemsDto.getQuantity())
                 .build();
     }
+
+    /**
+     * Retrieves all orders from the database.
+     */
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
+    }
+
+    /**
+     * Retrieves a specific order by its order number.
+     */
+    public Order getOrderByOrderNumber(String orderNumber) {
+        return orderRepository.findAll().stream()
+                .filter(order -> order.getOrderNumber().equals(orderNumber))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Order not found with order number: " + orderNumber));
+    }
 }
