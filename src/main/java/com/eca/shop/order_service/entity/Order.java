@@ -5,11 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import com.google.cloud.spring.data.firestore.Document;
 
 import java.util.List;
 
-@Document(value = "orders")
+@Document(collectionName = "orders")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
