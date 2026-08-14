@@ -1,5 +1,6 @@
 package com.eca.shop.order_service.entity;
 
+import com.google.cloud.firestore.annotation.DocumentId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +18,7 @@ import java.util.List;
 public class Order {
     @Id
     private String id;
+    @DocumentId
     private String orderNumber;
     private Long userId;
     private List<OrderLineItems> orderLineItemsList;
