@@ -59,7 +59,7 @@ public class OrderService {
                 .sum();
         order.setTotalPrice(totalPrice);
 
-        orderRepository.save(order);
+        orderRepository.save(order).block();
         log.info("Order Placed Successfully with Order Number: {}", order.getOrderNumber());
         return "Order Placed Successfully with Order Number: " + order.getOrderNumber();
     }
@@ -73,13 +73,12 @@ public class OrderService {
     }
 
     public List<Order> getAllOrders() {
-        return orderRepository.findAll();
+        return orderRepository.findAll().collectList().block();
     }
 
     public Order getOrderByOrderNumber(String orderNumber) {
-        return orderRepository.findAll().stream()
+        return orderRepository.findAll()
                 .filter(order -> order.getOrderNumber().equals(orderNumber))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Order not found with order number: " + orderNumber));
+                .blockFirst();
     }
 }
